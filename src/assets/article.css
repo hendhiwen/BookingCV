@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    zoom: 1
+}
+html {
+    font-size: 16px;
+    min-height: 100%
+}
+body {
+    /*font: 75%/150%"Lato", Arial, Helvetica, sans-serif;*/
+    font-family: 'Karla', sans-serif;
+    background-color: #fff;
+    /*color: #838383;*/
+    color: #97694B;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -ms-overflow-style: scrollbar;
+}
+
+.box {
+    margin-bottom:20px;
+}
+
+.section-container{
+    margin: 10px;
+    color:#795548;
+    background: #f5f5f5!important;
+}
+
+.section-container section{
+    background: white!important;
+    margin-bottom:20px;
+}
+
+.box-title {
+    margin-bottom:0;
+    line-height:1em;
+    padding-top:10px;
+    letter-spacing: 0.04em;
+}
+
+.box-title small {
+    font-size:10px;
+    color:#838383;
+    text-transform:uppercase;
+    display:block;
+    margin-top:4px
+}
+.box-title small[class^="soap-icon"] {
+    color:#fdb714;
+    font-size:1.3333em
+}
+h2.box-title small {
+    font-size:11px
+}
+h1.box-title small {
+    font-size:12px
+}
+
+.result-detail{
+    color:#795548;
+    border-right: 1px solid #f5f5f5;
+    letter-spacing:0.04em;
+}
+
+.result-detail h4 {
+    font-size: 16px;
+    font-weight: normal;
+    color: #067325;
+    text-transform: uppercase;
+    margin-top:5px;
+}
+
+.skin-color {
+    color: #01b7f2;
+}
+
+.result-detail a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+.result-detail p {
+    font-size: 15px;
+    line-height: 1.6666;
+    margin-bottom: 15px;
+}
+
+.result-price{
+    padding:10px;    
+}
+
+.result-price .price {
+    color:#067325;
+    font-size:1.6667em;
+    text-transform:uppercase;
+    text-align:center;
+    line-height:1;
+    display:block
+}
+.result-price .price small {
+    display:block;
+    color:#838383;
+    font-size:0.5em;
+    margin-bottom:5px
+}
+
+.result-price h2 {
+    font-family: inherit;
+    color:#067325;
+    text-align: center;
+    float:none;
+    font-size: 1.6667em;
+    padding: 10px;
+    display: block;
+}
+
+.result-price .price-wrapper {
+    font-weight:normal;
+    text-transform:uppercase;
+    font-size:0.8333em;
+    color:inherit;
+    line-height:1.3333em;
+    margin:0
+}
+.result-price .price-wrapper .price-per-unit {
+    color:#7db921;
+    font-size:1.4em;
+    padding-right:5px
+}
+
+.full-width {
+    width: 90% !important;
+}

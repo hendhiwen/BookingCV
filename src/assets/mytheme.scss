@@ -1,0 +1,182 @@
+/*
+ * Copyright (C) 2016-2018 by Teradata Corporation. All rights reserved.
+ */
+
+ @import '~@angular/material/theming';
+ @import '~@covalent/core/theming/all-theme';
+ // Plus imports for other components in your app.
+ 
+ // Include the base styles for Angular Material core. We include this here so that you only
+ // have to load a single css file for Angular Material in your app.
+ @include mat-core();
+ 
+ // Define the palettes for your theme using the Material Design palettes available in palette.scss
+ // (imported above). For each palette, you can optionally specify a default, lighter, and darker
+ // hue.
+ $primary: mat-palette($mat-orange, 800, 100, 900);
+ $accent:  mat-palette($mat-light-blue, 700, 100, 800);
+ 
+ // The warn palette is optional (defaults to red).
+ $warn:    mat-palette($mat-red, 600, 100, 800);
+ 
+ // Create the theme object (a Sass map containing all of the palettes).
+ $theme: mat-light-theme($primary, $accent, $warn);
+ 
+ // Include theme styles for core and each component used in your app.
+ // Alternatively, you can import and @include the theme mixins for each component
+ // that you are using.
+ @include angular-material-theme($theme);
+ @include covalent-theme($theme);
+ 
+ // Active icon color in list nav
+ mat-nav-list, mat-list {
+     [mat-list-item].active {
+         mat-icon[matListAvatar] {
+             background-color: mat-color($accent);
+             color: mat-color($accent, default-contrast);
+         }
+         mat-icon[matListIcon] {
+             color: mat-color($accent);
+         }
+     }
+ }
+ 
+ /* ------------------------------------------------------------------------------- */
+ $foreground: map-get($theme, foreground);
+ $background: map-get($theme, background);
+ 
+ // Apply theme for this app
+ 
+ // NGX Charts
+ [ngx-charts-axis-label] text {
+     fill: mat-color($foreground, secondary-text);
+ }
+ .tick text {
+     fill: mat-color($foreground, disabled);
+ }
+ .gridline-path {
+     &.gridline-path-horizontal,
+     &.gridline-path-vertical {
+         stroke: rgba(black, 0.06);
+     }
+ }
+
+ .legend-title-text {
+     color: mat-color($foreground, secondary-text);
+ }
+ 
+ mat-card-title{
+   &:hover {
+     cursor: grab;
+     cursor: -moz-grab;
+     cursor: -webkit-grab;
+   }
+   &:active {
+     cursor: grabbing;
+     cursor: -moz-grabbing;
+     cursor: -webkit-grabbing;
+   }
+ }
+
+app-booking{
+  mat-card-content{
+      background: #f5f5f5!important;
+  }  
+
+  .mat-toolbar{
+      margin-top:10px;
+      height:125px!important;
+      border: none;
+  }
+
+  .mat-toolbar button{
+    position:absolute;
+    float: left;  
+  }
+
+  .back-button{
+    position:absolute;
+    float: left;
+  }
+
+  .booking-logo{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;    
+  }
+
+  .booking-container {
+    margin-top:10px;
+  }
+
+  .booking-logo{
+      align-items: center;
+  }
+
+  .mat-input-flex .mat-form-field-flex{
+    min-width:80px!important;
+  }  
+
+  .form-container{
+    margin: 10px;
+    color:#795548;
+    background: white!important;
+  }
+
+  .form-container .addon-note{
+    padding: 10px;
+  }
+  
+  .form-container .addon-note a {
+    text-decoration: none;
+    color: #067325;
+  }
+
+  .form-container .result-title h3{
+    color:#067325;
+    font-size:17px;
+    margin-top:5px; 
+    padding: 10px;
+    font-weight: normal;
+    text-transform: uppercase;
+    align-items: left!important;
+    justify-content: left!important;
+  }
+
+  .form-container .mat-grid-tile .mat-figure{
+    align-items: left!important;
+    justify-content: left!important;
+  }
+
+  .form-container .lang-switch{
+    display: table;
+    margin-top:5px; 
+    padding: 10px;
+    font-weight: normal;
+    padding-right: 15px;
+    float:right;
+  }
+
+  .form-container .lang-switch img{
+    cursor:pointer;
+    float:right;
+    padding: 2px;
+  }
+
+  .mat-input-flex{
+      margin-top: 13px;
+  }
+
+  
+}
+
+.mat-form-field {
+  display: block;
+  width: 100%;
+  line-height: 1.5;
+}
+
+.mat-form-field-wrapper{
+    padding-left: 10px;
+}
+

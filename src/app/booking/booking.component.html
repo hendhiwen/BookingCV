@@ -1,0 +1,124 @@
+<td-layout>
+    <div layout-gt-sm="row" tdMediaToggle="gt-xs">
+        <div flex-gt-sm>
+            <mat-card>
+                <mat-card-title>
+                    <a mat-icon-button matTooltip="Back" matTooltipPosition="before" href="javascript:;" target="_blank" class="back-button"><mat-icon>navigate_before</mat-icon></a>
+                    <div td-toolbar-content  class="booking-logo">
+                        <img src="assets/dwj.png" alt="Dwijaya" width="130px" class="booking-logo">           
+                    </div>
+                </mat-card-title>                
+                <!--mat-divider></mat-divider -->
+                <mat-card-content>
+                    <form #bookingForm="ngForm" class="form-container">
+                        <div class="form-inline" layout-margin>
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                <mat-form-field flex >
+                                    <input matInput [matDatepicker]="checkinDate" [min]="minCheckinDate" (dateChange)="onDateChanged('checkin',$event)" #checkinDateForm="ngModel" [(ngModel)]="bookingCheckin" name="bookingCheckin" placeholder="CHECK IN" dateFormat="dd-MM-yyyy" class="text-center" required readonly>
+                                    <mat-datepicker-toggle matSuffix [for]="checkinDate" ></mat-datepicker-toggle>
+                                    <mat-datepicker #checkinDate ></mat-datepicker>
+                                    <mat-hint>
+                                        <span [hidden]="checkinDateForm.pristine || !checkinDateForm.errors?.required" class="tc-red-600">Required</span>
+                                    </mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                <mat-form-field flex>
+                                    <input matInput [matDatepicker]="checkoutDate" [min]="minCheckoutDate" (dateChange)="onDateChanged('checkout',$event)" #checkoutDateForm="ngModel"  [(ngModel)]="bookingCheckout" name="bookingCheckout" placeholder="CHECK OUT" class="text-center" required readonly>
+                                    <mat-datepicker-toggle matSuffix [for]="checkoutDate"></mat-datepicker-toggle>
+                                    <mat-datepicker #checkoutDate ></mat-datepicker>
+                                    <mat-hint>
+                                        <span [hidden]="checkoutDateForm.pristine || !checkoutDateForm.errors?.required" class="tc-red-600">Required</span>
+                                    </mat-hint>
+                                </mat-form-field>  
+                            </div>
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                <mat-form-field flex>
+                                    <input matInput type="number" #numOfGuestForm="ngModel" [(ngModel)]="bookingNumGuest" name="bookingNumGuest" placeholder="GUEST(S)"  min="1" max="5" required class="text-center">
+                                    <mat-hint>
+                                        <span [hidden]="numOfGuestForm.pristine || !numOfGuestForm.errors?.required" class="tc-red-600">Required</span>
+                                    </mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                <div class="inset" flex>
+                                    <button mat-raised-button color="accent" [disabled]="!bookingForm.valid" class="mat-form-field text-upper text-center" (click)="doFind()">SEARCH NOW</button>
+                                </div>
+                                
+                            </div>          
+                        </div>   
+                    </form>
+                    <div class="form-container">
+                        <div class="addon-note" >Staying for more than 7 night(s)? Did you know that if you call our Front Desk, you may get BETTER daily rates? Call <a href="tel:622127513800">+6221 2751 3800</a> now to confirm.</div>
+                    </div>
+                    <div class="form-container">
+                        <div class="row">
+                            <div class="col-md-8 col-xs-12" >
+                                <div class="result-title"><h3>CHECK OUT DATE : {{ bookingCheckout.format('DD-MM-YYYY') }} / <span>{{ bookingNumOfDays }} night(s)</span></h3>
+                                </div>                                
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="lang-switch" >
+                                    <img class="flag-currency" data-curr="JPY" src="../assets/icon/Japan-icon.png" title="JPY" (click)="changeCurrency('yen')">
+                                    <img class="flag-currency" data-curr="IDR" src="../assets/icon/Indonesia-icon.png" title="IDR" (click)="changeCurrency('idr')">
+                                    <img class="flag-currency" data-curr="USD" src="../assets/icon/USA-icon.png" title="USD" (click)="changeCurrency('usd')">
+                                    
+                                    <!--span>Currency : </span-->
+                                </div>
+                            </div>
+                        </div>                                                   
+                    </div>
+                    <div class="section-container" *ngIf="listRooms != null">
+                        <section *ngFor="let room of listRooms">
+                            <div layout-gt-xs="row" class="row" >
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 " layout-align="center">
+                                    <a title="" href="https://app.dwijayahouse.com/booking/reservation/slideshow_popup/3" class="hover-effect popup-gallery">
+                                        <img src="{{room?.picUrl}}" alt="{{room?.unitTypeName}}" width="100%">
+                                    </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 result-detail" layout-align="center">
+                                    <h4 class="box-title">{{room?.unitTypeName}}</h4>
+                                    <hr>
+                                    <div>
+                                        <p style="min-height: 100px; display:block;">{{room?.desc}}<br>
+                                            <a href="https://app.dwijayahouse.com/booking/reservation/rate_details/3" class="btn-details"><span class="skin-color">Rate Details</span></a> • <a href="https://app.dwijayahouse.com/booking/reservation/room_details/3" class="btn-details"><span class="skin-color">Room Details</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 result-price text-center" >
+                                    <span class="price"><small style="border-bottom: 0px; text-align: center; padding: 15px; border-right: 0px;">TOTAL RATE</small></span><h2 class="box-title" style="text-align: center;float:none;padding: 10px;display: block;">{{ displayNameByCurrency(room)['prefix'] }}  {{displayNameByCurrency(room)['value'] | number}}</h2>
+                                    <button mat-raised-button color="accent" class="text-upper full-width ">BOOK NOW</button>
+                                </div>
+                            </div>
+                            <!--article class="box" *ngFor="let room of listRooms">
+                                <figure class="col-sm-3 col-md-3 col-xs-12">
+                                    <a title="" href="http://192.168.1.36:8080/dwijaya_booking/reservation/slideshow_popup/20" class="hover-effect popup-gallery"><img width="270" height="160" alt="Open Plan" src="http://192.168.1.36:8080/dwijaya_booking/assets/images/hotels/medium/OpenPlan-03.jpg"></a>
+                                </figure>
+                                <div class="col-md-6 col-sm-6 col-xs-12 details">
+                                    <div>
+                                        <h4 class="box-title" style="display:block; float: none;">{{room?.unitTypeName}}</h4>
+                                    </div>
+                                    <div>
+                                        <p style="min-height: 100px; display:block;">{{room?.desc}}<br/>
+                                            <a href="http://192.168.1.36:8080/dwijaya_booking/reservation/rate_details/20" class="btn-details"><span class="skin-color">Rate Details</span></a> • <a href="http://192.168.1.36:8080/dwijaya_booking/reservation/room_details/20" class="btn-details"><span class="skin-color">Room Details</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12 details" style="text-align: center; padding-right: 15px;">
+                                    <span class="price"><small style="border-bottom: 0px; text-align: center; padding: 15px; border-right: 0px;">TOTAL RATE</small></span><h2 class="box-title" style="text-align: center;float:none;padding: 10px;display: block;">{{ displayNameByCurrency(room)['prefix'] }}  {{displayNameByCurrency(room)['value'] | number}}</h2>
+                                    <a data-unittype_id="20" data-deposit="0" data-total_rate="800000" data-tax="80000" class="button btn-small full-width text-center btn-booking green" title="Book now" href="http://192.168.1.36:8080/dwijaya_booking/reservation/package_breakfast">BOOK NOW</a>
+                                </div>
+                            </article-->
+                        </section>
+                    </div>
+                </mat-card-content>
+            </mat-card>            
+        </div>
+    </div>
+    <td-layout-footer>
+        <div layout="row" layout-align="start center">
+            <span class="md-caption">Copyright of <mat-icon class="text-md">favorite</mat-icon> <a href="javascript:;" class="text-nodecoration tc-blue-700">MonIT</a>, using Angular v5 + Angular Material.</span>
+        </div>
+    </td-layout-footer>
+</td-layout>
+
